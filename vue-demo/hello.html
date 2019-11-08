@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello</title>
+</head>
+<body>
+<div id="app">
+    <!--vue基本使用-->
+    <input type="text" v-model="num">
+    <input type="text" v-model="name">
+    <button @click="num++">增加</button>
+    <br>
+    <button @click="handleclick">点我</button>
+    <h1>
+        <span v-text="name"></span> 非常帅！！<br>
+        有{{num}}位女神为你着迷！
+    </h1>
+    <span v-text="name"></span><br>
+    <span v-html="name"></span><br>
+
+    <!--v-model-->
+    <h2>传智播客已开设的课程</h2>
+    <input type="checkbox" v-model="lessons"  value="Java">Java <br>
+    <input type="checkbox" v-model="lessons" value="Python">Python <br>
+    <input type="checkbox" v-model="lessons" value="IOS">IOS <br>
+    <h3>
+        您已选择下列课程：{{lessons.join(",")}} <br>
+        <span v-text="lessons.join(',')"></span>
+    </h3>
+
+    <!--事件修饰符-->
+    <div style="width: 100px ;height: 100px; background-color:darkslategrey;" @click.stop="hitme('div')">
+        <input type="button"  @click.stop="hitme('button')">点我试试
+    </div>
+    <!--v-on-->
+    <a href="http://www.baidu.com" @click.prevent="hitme('百度一下，你就知道')">百度一下，你就知道</a>
+
+
+    <!--v-for-->
+
+    <!--遍历数组-->
+    <ul>
+        <li v-for="(user,i) in users" :key="i">
+           <!--<span v-text="i + ' ' + user.name + ',' + user.gender + ',' + user.age"></span>-->
+            {{i+1}} {{user.name + "," + user.gender + "," + user.age}}
+        </li>
+    </ul>
+    <!--遍历对象-->
+    <ul>
+        <li v-for="(value,key,index) in users[0]">
+            {{index + "_" + key + ":" + value}}
+        </li>
+    </ul>
+    <!--遍历数字-->
+    <ul>
+        <li v-for="(num,i) in 5">
+            {{i + ":" + num}}
+        </li>
+    </ul>
+
+    <input type="button" @click="show = !show" value="点我切换">
+        <h2 v-if="show">你好啊,if!!!</h2>
+        <h2 v-show="show">你好啊,show!!</h2>
+    <ul>
+        <li v-for="i in 5">
+            <span v-if="i %2 === 0" style="background: red;">偶数{{i}}</span>
+            <span v-else >奇数{{i}}</span>
+        </li>
+    </ul>
+
+
+</div>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script type="text/javascript">
+    //生成一个vue实例
+
+    var app = new Vue({
+        el: "#app",// el,即element。要渲染的的页面元素,要作用的标签
+        data: { //数据
+            name: "",
+            num: 18,
+            lessons: [],
+            users:[
+                {name:'柳岩', gender:'女', age: 21},
+                {name:'虎哥', gender:'男', age: 30},
+                {name:'范冰冰', gender:'女', age: 24},
+                {name:'刘亦菲', gender:'女', age: 18},
+                {name:'古力娜扎', gender:'女', age: 25}
+            ],
+            show: false
+        },
+        methods: {
+            handleclick() {
+                console.log("hello");
+                console.log(this)
+            },
+            hitme(msg){
+                console.log(msg);
+            }
+        },
+        created() {
+            //this.name = "yjk";
+            //setTimeout(() => this.name="坤哥",1000)
+            this.name="<font color='#d2691e'>坤哥</font>"
+        }
+    });
+</script>
+</body>
+</html>

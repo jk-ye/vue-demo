@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>hello3</title>
+</head>
+<body>
+
+<div id="app">
+
+    <introduce :title="msg"></introduce>
+    <hr>
+    <choose :items="lessons"></choose>
+
+</div>
+
+
+<script src="node_modules/vue/dist/vue.js"></script>
+<script type="text/javascript">
+
+    //局部组件
+    const introduce = {
+        template: "<h1>{{title}}</h1>",
+        props:['title']
+    };
+
+    const choose ={
+        template: "<ul><li v-for='item in items'>{{item}}</li></ul>",
+        props: {
+            items:{
+                type: Array,
+                default: ['java'],
+                required: true
+            }
+        }
+    };
+
+    const app = new Vue({
+        el: "#app",
+        data:{
+            msg: "大家好，我是渣渣辉！",
+            lessons:['java','php','python'],
+        },
+        components: {
+            introduce,choose
+        }
+    })
+</script>
+</body>
+</html>
